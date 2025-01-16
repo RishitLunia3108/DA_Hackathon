@@ -20,10 +20,17 @@ st.title("🎯 **DA Hackathon**")
 
 st.write("""  
 ### ⚠️ **Critical Note**:  
-- **Do not change the order of the columns or rows** in the file you are uploading; it should be the same as the `train.csv` provided to you.  
+- **Do not change the order of the columns or rows** in the file you are uploading; it should be the same as the `train.csv`/`test.csv` provided to you.  
 - You only need to add a new column named `y` with your predictions to the provided file structure.  
 - Any changes to the structure (e.g., reordering rows, renaming columns, or modifying existing data) will result in incorrect calculations.  
-""")  
+
+### 📝 **Sample Format for the Input CSV**:  
+| age | job         | marital  | education | default | balance | housing | loan | contact  | day | month | duration | campaign | pdays | previous | poutcome | y   |  
+|-----|-------------|----------|-----------|---------|---------|---------|------|----------|-----|-------|----------|----------|-------|----------|----------|-----|  
+| 1  | management  | married  | tertiary  | no      | 2143    | yes     | no   | unknown  | 5   | may   | 261      | 1        | -1    | 0        | unknown  | no  |  
+| 2  | technician  | single   | secondary | no      | 29      | yes     | no   | unknown  | 5   | may   | 151      | 1        | -1    | 0        | unknown  | no  |  
+
+""")
 
 st.write("""  
 ### ⚠️ **Important Instructions**:  
