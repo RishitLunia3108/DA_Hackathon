@@ -10,9 +10,9 @@ from datetime import datetime
 import tempfile  
 
 # File paths  
-TRUTH_FILE_PATH = "test_ans.csv"
+TRUTH_FILE_PATH = "test_ans.csv"  
 temp_dir = tempfile.gettempdir()  
-RESULTS_FILE_PATH = f"{temp_dir}/f1_scores.csv"
+RESULTS_FILE_PATH = f"{temp_dir}/f1_scores.csv"  
 
 # Streamlit page configuration  
 st.set_page_config(page_title="Hackathon", layout="wide")  
@@ -79,8 +79,24 @@ except Exception as e:
 st.write("### 📂 **Upload Your Files**")  
 pred_file = st.file_uploader("1️⃣ Upload your **Prediction CSV** file:", type=['csv'])  
 
-# Add submit button  
-submit_button = st.button("🚀 **Submit and Calculate F1 Score**")  
+# Add submit and download buttons side by side  
+col1, col2 = st.columns(2)  
+
+with col1:  
+    submit_button = st.button("🚀 **Submit and Calculate F1 Score**")  
+
+with col2:  
+    # Add a download button for the leaderboard  
+    if os.path.exists(RESULTS_FILE_PATH):  
+        with open(RESULTS_FILE_PATH, "rb") as file:  
+            st.download_button(  
+                label="📥 Download Leaderboard",  
+                data=file,  
+                file_name="f1_scores.csv",  
+                mime="text/csv",  
+            )  
+    else:  
+        st.info("ℹ️ **Leaderboard not available yet.**")  
 
 if submit_button:  
     # Ensure the file is uploaded  
@@ -137,23 +153,14 @@ if submit_button:
                     if os.path.exists(RESULTS_FILE_PATH):  
                         try:  
                             leaderboard_df = pd.read_csv(RESULTS_FILE_PATH)  
-                            st.dataframe(leaderboard_df)  # Display the leaderboard in the app  
-                    
-                            # Add a download button for the leaderboard  
-                            with open(RESULTS_FILE_PATH, "rb") as file:  
-                                st.download_button(  
-                                    label="📥 Download Leaderboard",  
-                                    data=file,  
-                                    file_name="f1_scores.csv",  
-                                    mime="text/csv",  
-                                )  
+                            st.dataframe(leaderboard_df)  
                         except Exception as e:  
                             st.error(f"❌ **Error reading leaderboard file**: {str(e)}")  
                     else:  
-                        st.info("ℹ️ **No results available yet. Submit a prediction file to see the leaderboard.**")
+                        st.info("ℹ️ **No results available yet. Submit a prediction file to see the leaderboard.**")  
+
+                    st.write(f"Leaderboard file path: {RESULTS_FILE_PATH}")  
                     
-                     
-                
                 except Exception as e:  
                     st.error(f"❌ **Error calculating metrics**: {str(e)}")  
                     st.write("Please ensure the `y` column contains valid categorical or numerical data.")  
