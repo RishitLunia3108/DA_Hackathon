@@ -137,13 +137,20 @@ if submit_button:
                     if os.path.exists(RESULTS_FILE_PATH):  
                         try:  
                             leaderboard_df = pd.read_csv(RESULTS_FILE_PATH)  
-                            st.dataframe(leaderboard_df)  
+                            st.dataframe(leaderboard_df)  # Display the leaderboard in the app  
+                    
+                            # Add a download button for the leaderboard  
+                            with open(RESULTS_FILE_PATH, "rb") as file:  
+                                st.download_button(  
+                                    label="📥 Download Leaderboard",  
+                                    data=file,  
+                                    file_name="f1_scores.csv",  
+                                    mime="text/csv",  
+                                )  
                         except Exception as e:  
                             st.error(f"❌ **Error reading leaderboard file**: {str(e)}")  
                     else:  
-                        st.info("ℹ️ **No results available yet. Submit a prediction file to see the leaderboard.**")  
-
-                    st.write(f"Leaderboard file path: {RESULTS_FILE_PATH}")
+                        st.info("ℹ️ **No results available yet. Submit a prediction file to see the leaderboard.**")
                     
                      
                 
