@@ -7,10 +7,12 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score  
 import os  
 from datetime import datetime  
+import tempfile  
 
 # File paths  
-TRUTH_FILE_PATH = r"D:\Hackathon\test_ans.csv"  # Replace with your actual path  
-RESULTS_FILE_PATH = r"D:\Hackathon\f1_scores.csv"  # Path for saving results  
+TRUTH_FILE_PATH = "test_ans.csv"
+temp_dir = tempfile.gettempdir()  
+RESULTS_FILE_PATH = f"{temp_dir}/f1_scores.csv"
 
 # Streamlit page configuration  
 st.set_page_config(page_title="Hackathon", layout="wide")  
