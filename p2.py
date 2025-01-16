@@ -131,6 +131,18 @@ if submit_button:
                     report_df = pd.DataFrame(report).drop('accuracy', axis=1).T  
                     report_df = report_df.round(4)  
                     st.dataframe(report_df)  
+
+                    st.write("### 🏆 **Leaderboard**")  
+
+                    if os.path.exists(RESULTS_FILE_PATH):  
+                        try:  
+                            leaderboard_df = pd.read_csv(RESULTS_FILE_PATH)  
+                            st.dataframe(leaderboard_df)  
+                        except Exception as e:  
+                            st.error(f"❌ **Error reading leaderboard file**: {str(e)}")  
+                    else:  
+                        st.info("ℹ️ **No results available yet. Submit a prediction file to see the leaderboard.**")  
+                    
                      
                 
                 except Exception as e:  
