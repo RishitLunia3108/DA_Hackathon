@@ -158,8 +158,6 @@ if submit_button:
                             st.error(f"❌ **Error reading leaderboard file**: {str(e)}")  
                     else:  
                         st.info("ℹ️ **No results available yet. Submit a prediction file to see the leaderboard.**")  
-
-                    st.write(f"Leaderboard file path: {RESULTS_FILE_PATH}")  
                     
                 except Exception as e:  
                     st.error(f"❌ **Error calculating metrics**: {str(e)}")  
