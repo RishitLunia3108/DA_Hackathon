@@ -23,7 +23,7 @@ st.write("""
 - **Do not change the order of the columns or rows** in the file you are uploading; it should be the same as the `train.csv`/`test.csv` provided to you.  
 - You only need to add a new column named `y` with your predictions to the provided file structure.  
 - Any changes to the structure (e.g., reordering rows, renaming columns, or modifying existing data) will result in incorrect calculations.  
-- After submitting your CSV just relaod the page so that you name gets updated into the LeaderBoard
+- After submitting your CSV just relaod the page so that your name gets updated into the LeaderBoard
 
 ### 📝 **Sample Format for the Input CSV**:  
 | age | job         | marital  | education | default | balance | housing | loan | contact  | day | month | duration | campaign | pdays | previous | poutcome | y   |  
