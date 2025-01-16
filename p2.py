@@ -23,6 +23,7 @@ st.write("""
 - **Do not change the order of the columns or rows** in the file you are uploading; it should be the same as the `train.csv`/`test.csv` provided to you.  
 - You only need to add a new column named `y` with your predictions to the provided file structure.  
 - Any changes to the structure (e.g., reordering rows, renaming columns, or modifying existing data) will result in incorrect calculations.  
+- After submitting your CSV just relaod the page so that you name gets updated into the LeaderBoard
 
 ### 📝 **Sample Format for the Input CSV**:  
 | age | job         | marital  | education | default | balance | housing | loan | contact  | day | month | duration | campaign | pdays | previous | poutcome | y   |  
@@ -48,11 +49,11 @@ def save_results(pred_filename, f1_score):
     if os.path.exists(RESULTS_FILE_PATH):  
         results_df = pd.read_csv(RESULTS_FILE_PATH)  
     else:  
-        results_df = pd.DataFrame(columns=['Prediction_File', 'F1_Score', 'Timestamp'])  
+        results_df = pd.DataFrame(columns=['TeamName', 'F1_Score', 'Timestamp'])  
     
     # Add new result  
     new_result = pd.DataFrame({  
-        'Prediction_File': [pred_file_name],  
+        'TeamName': [pred_file_name],  
         'F1_Score': [f1_score],  
         'Timestamp': [datetime.now().strftime("%Y-%m-%d %H:%M:%S")]  
     })  
@@ -61,8 +62,8 @@ def save_results(pred_filename, f1_score):
     results_df = pd.concat([results_df, new_result], ignore_index=True)  
     
     # Keep only the highest F1 score for each team  
-    results_df = results_df.sort_values(by=['Prediction_File', 'F1_Score'], ascending=[True, False])  
-    results_df = results_df.drop_duplicates(subset=['Prediction_File'], keep='first')  
+    results_df = results_df.sort_values(by=['TeamName', 'F1_Score'], ascending=[True, False])  
+    results_df = results_df.drop_duplicates(subset=['TeamName'], keep='first')  
     
     # Sort by F1 Score to assign ranks  
     results_df = results_df.sort_values(by='F1_Score', ascending=False).reset_index(drop=True)  
