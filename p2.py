@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score  
 import os  
 from datetime import datetime  
-import tempfile  
+import tempfile     
 
 # File paths  
 TRUTH_FILE_PATH = "test_ans.csv"  
